@@ -1,8 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Plantin MT Pro';
+  src: url('./assets/fonts/PlantinMTProRg.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plantin MT Pro';
+  src: url('./assets/fonts/PlantinMTProLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: 'Instrument Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-plantin: 'Plantin MT Pro', Georgia, serif;
 }
 
 * {
@@ -19,6 +36,11 @@ body {
   color: #1a1917;
   font-family: 'Instrument Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: 'Plantin MT Pro', Georgia, serif;
+  font-weight: 300;
 }
 
 ::selection {
