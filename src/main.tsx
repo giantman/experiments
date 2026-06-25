@@ -6,7 +6,7 @@ import App from './App.tsx'
 const redirect = sessionStorage.getItem('spa-redirect')
 if (redirect) {
   sessionStorage.removeItem('spa-redirect')
-  window.history.replaceState(null, '', '/experiments' + redirect)
+  window.history.replaceState(null, '', '/labs' + redirect)
 }
 
 createRoot(document.getElementById('root')!).render(
