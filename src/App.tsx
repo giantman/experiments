@@ -7,7 +7,7 @@ import Experiments from './pages/Experiments'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/experiments">
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Redirect unknown paths back through the SPA router
+      const path = window.location.pathname.replace('/experiments', '') || '/'
+      sessionStorage.setItem('spa-redirect', path + window.location.search)
+      window.location.replace('/experiments/')
+    </script>
+  </head>
+  <body></body>
+</html>
