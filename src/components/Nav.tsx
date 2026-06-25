@@ -35,10 +35,10 @@ export default function Nav() {
       </div>
 
       <a
-        href="mailto:hello@gmco.studio"
+        href="mailto:manukyan.robert@gmail.com"
         className="text-sm text-[#1a1917] hover:opacity-50 transition-opacity text-right whitespace-nowrap"
       >
-        Email, Instagram ↗
+        Contact
       </a>
     </nav>
   )
