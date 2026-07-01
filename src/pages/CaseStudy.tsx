@@ -1,26 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { caseStudies } from '../data'
 
-function DarkPlaceholder({ label }: { label?: string }) {
-  return (
-    <div
-      className="relative w-full h-full"
-      style={{
-        backgroundColor: '#252320',
-        backgroundImage: `
-          linear-gradient(rgba(200,198,195,0.1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(200,198,195,0.1) 1px, transparent 1px)
-        `,
-        backgroundSize: '72px 72px',
-      }}
-    >
-      {label && (
-        <span className="absolute bottom-3 left-3 text-[0.64rem] font-mono text-[#c8c5c2]/40 leading-tight uppercase tracking-wide">
-          {label}
-        </span>
-      )}
-    </div>
-  )
+function ImagePlaceholder() {
+  return <div className="w-full h-full bg-[#D0CECC]" />
 }
 
 export default function CaseStudy() {
@@ -29,10 +11,10 @@ export default function CaseStudy() {
 
   if (!study) {
     return (
-      <main className="min-h-screen flex items-center justify-center px-4">
+      <main className="min-h-screen flex items-center justify-center px-8">
         <div>
-          <p className="text-base text-[#1a1917]/50 mb-4">Not found.</p>
-          <Link to="/work" className="text-base text-[#1a1917] underline underline-offset-2">
+          <p className="text-sm text-[#1a1917]/50 mb-4">Not found.</p>
+          <Link to="/work" className="text-sm text-[#1a1917] underline underline-offset-2">
             ← Work
           </Link>
         </div>
@@ -41,51 +23,45 @@ export default function CaseStudy() {
   }
 
   return (
-    <main>
-      <div className="border-t border-[#1a1917]/25 mx-4" />
-
+    <main className="pt-[72px]">
       {/* Header */}
-      <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 px-4 pt-5 pb-6 border-t border-[#1a1917]/25">
-        <p className="text-[1.1rem] text-[#1a1917]">{study.title}</p>
-        <p className="text-[1.1rem] text-[#1a1917]/50">{study.tags.join(', ')}</p>
-        <div className="text-base text-[#1a1917] leading-snug">
-          {Object.entries(study.metadata).map(([k, v]) => (
-            <p key={k}>{v}</p>
+      <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 px-8 pt-6 pb-5 border-b border-[#1a1917]/10">
+        <p className="text-sm text-[#1a1917]">{study.title}</p>
+        <p className="text-sm text-[#1a1917]/40">{study.tags.join(', ')}</p>
+        <div className="text-sm text-[#1a1917]/40 leading-snug">
+          {Object.entries(study.metadata).map(([, v]) => (
+            <span key={v} className="mr-4">{v}</span>
           ))}
         </div>
       </div>
 
       {/* Content */}
-      <div className="grid grid-cols-[1fr_2.5fr_1fr] gap-4 px-4 pb-12 items-start">
-        <div className="text-base text-[#1a1917] leading-[1.55]">
-          <p className="font-bold mb-3">{study.shortDescription}</p>
+      <div className="grid grid-cols-[1fr_2.5fr_1fr] gap-4 px-8 py-10 items-start">
+        <div className="text-sm text-[#1a1917] leading-[1.55]">
+          <p className="font-medium mb-3">{study.shortDescription}</p>
           {study.description.map((para, i) => (
-            <p key={i} className="mb-3">{para}</p>
+            <p key={i} className="mb-3 text-[#1a1917]/70">{para}</p>
           ))}
         </div>
 
         <div className="aspect-[4/3]">
-          <DarkPlaceholder label="01 — Placeholder Image" />
+          <ImagePlaceholder />
         </div>
 
         <div className="flex flex-col gap-3">
           <div>
-            <div className="aspect-square">
-              <DarkPlaceholder />
-            </div>
-            <p className="text-sm text-[#1a1917]/50 mt-1.5">Figure 1</p>
+            <div className="aspect-square"><ImagePlaceholder /></div>
+            <p className="text-xs text-[#1a1917]/40 mt-1.5">Figure 1</p>
           </div>
           <div>
-            <div className="aspect-square">
-              <DarkPlaceholder />
-            </div>
-            <p className="text-sm text-[#1a1917]/50 mt-1.5">Figure 2</p>
+            <div className="aspect-square"><ImagePlaceholder /></div>
+            <p className="text-xs text-[#1a1917]/40 mt-1.5">Figure 2</p>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-[#1a1917]/25 mx-4 py-4">
-        <Link to="/work" className="text-base text-[#1a1917] hover:opacity-50 transition-opacity">
+      <div className="border-t border-[#1a1917]/10 mx-8 py-5">
+        <Link to="/work" className="text-sm text-[#1a1917] hover:opacity-50 transition-opacity">
           ← Work
         </Link>
       </div>

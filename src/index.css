@@ -32,9 +32,10 @@ html {
 
 body {
   margin: 0;
-  background: #8c8986;
+  background: #eeeeee;
   color: #1a1917;
   font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 0.875rem;
   -webkit-font-smoothing: antialiased;
 }
 

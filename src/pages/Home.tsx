@@ -1,73 +1,95 @@
-import { ArrowRight, InfinitySymbol } from '@carbon/icons-react'
+import { Link } from 'react-router-dom'
+import starIcon from '../assets/star.svg'
 import { caseStudies } from '../data'
+import type { CaseStudy } from '../data'
 
-function DarkPlaceholder({ label }: { label?: string }) {
+function chunk<T>(arr: T[], size: number): T[][] {
+  const out: T[][] = []
+  for (let i = 0; i < arr.length; i += size) out.push(arr.slice(i, i + size))
+  return out
+}
+
+function LeftCard({ study }: { study: CaseStudy }) {
   return (
-    <div
-      className="relative w-full h-full min-h-[180px]"
-      style={{
-        backgroundColor: '#252320',
-        backgroundImage: `
-          linear-gradient(rgba(200,198,195,0.1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(200,198,195,0.1) 1px, transparent 1px)
-        `,
-        backgroundSize: '72px 72px',
-      }}
-    >
-      {label && (
-        <span className="absolute bottom-3 left-3 text-[0.64rem] font-mono text-[#c8c5c2]/40 leading-tight uppercase tracking-wide">
-          {label}
-        </span>
-      )}
-    </div>
+    <Link to={`/work/${study.id}`} className="group block border-r border-[#1a1917]/10">
+      <div className="aspect-[4/3] overflow-hidden">
+        <div className="w-full h-full bg-[#C8C6C3] group-hover:brightness-95 transition-all duration-300" />
+      </div>
+      <div className="px-8 py-4 flex items-baseline justify-between">
+        <p className="text-sm text-[#1a1917]">{study.title}</p>
+        <p className="text-xs text-[#1a1917]/40">{study.tags[0]}</p>
+      </div>
+    </Link>
+  )
+}
+
+function RightCard({ study }: { study: CaseStudy }) {
+  return (
+    <Link to={`/work/${study.id}`} className="group block">
+      <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center">
+        <img
+          src={starIcon}
+          alt=""
+          width={28}
+          height={28}
+          className="opacity-15 group-hover:opacity-25 transition-opacity"
+        />
+      </div>
+      <div className="px-8 py-4 flex items-baseline justify-between">
+        <p className="text-sm text-[#1a1917]">{study.title}</p>
+        <p className="text-xs text-[#1a1917]/40">{study.tags[0]}</p>
+      </div>
+    </Link>
   )
 }
 
 export default function Home() {
+  const rows = chunk(caseStudies, 2)
+
   return (
-    <main className="min-h-screen px-4 pt-4 overflow-hidden pt-40 pb-20">
-      <h1 className="text-[#1a1917] tracking-tight">
-        Experienced product designer and design leader with 15+ years designing 0<ArrowRight size={36} style={{ width: '1em', height: '1em' }} className="inline align-middle mx-1" />1 products.
-        Human-centered design and design engineering.
-        <br />
-        <br />
-        Areas of focus<ArrowRight size={36} style={{ width: '1em', height: '1em' }} className="inline align-middle mx-1" />product design, design engineering, design systems, brand/identity, and visual design.
-        <br />
-        <br />
-        Select work of Robert Manukyan<ArrowRight size={36} style={{ width: '1em', height: '1em' }} className="inline align-middle mx-1" />
-        forever designing<InfinitySymbol size={36} style={{ width: '1em', height: '1em' }} className="inline align-middle ml-1" />
-      </h1>
+    <main>
+      {/* Hero */}
+      <div className="grid grid-cols-2" style={{ height: 'calc(56vh - 72px)', marginTop: '72px' }}>
+        <div className="flex flex-col justify-end px-8 pb-10">
+          <div className="grid grid-cols-2 gap-6">
+            <p className="text-sm text-[#1a1917] leading-snug">
+              Onsite/Offsite is the design practice of Robert Manukyan, designer and design leader based in Los Angeles, CA.
+            </p>
+            <p className="text-sm text-[#1a1917] leading-snug">
+              Multi-disciplinary designer with a focus on AI Product design, design engineering, brand/identity, and visual design.
+            </p>
+          </div>
+        </div>
+        <div className="bg-[#C8C6C3] flex items-center justify-center">
+          <img src={starIcon} alt="" width={24} height={24} className="opacity-30" />
+        </div>
+      </div>
 
-      <div className="mt-20 -mx-4">
-        <div className="border-t border-[#1a1917]/25 mx-4" />
+      {/* Brand heading */}
+      <div className="bg-white px-8 py-3 border-t border-b border-[#1a1917]/8">
+        <h1
+          className="text-[#000000] leading-none tracking-tight"
+          style={{ fontFamily: "'Plantin MT Pro', Georgia, serif", fontWeight: 300, fontSize: 'clamp(48px, 11vw, 168px)' }}
+        >
+          Onsite/Offsite
+        </h1>
+      </div>
 
-        {caseStudies.map((study, i) => (
-          <div key={study.id}>
-            <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 px-4 pt-5 pb-6 border-t border-[#1a1917]/25">
-              <p className="text-[1.1rem] text-[#1a1917]">{`Project 0${i + 1}`}</p>
-              <p className="text-[1.1rem] text-[#1a1917]/50">{study.tags.join(', ')}</p>
-              <div className="text-base text-[#1a1917] leading-snug">
-                {Object.entries(study.metadata).map(([k, v]) => (
-                  <p key={k}>{v}</p>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-[1fr_2.5fr] gap-4 px-4 pb-12 items-start">
-              <div className="text-base text-[#1a1917] leading-[1.55]">
-                <p className="font-bold mb-3">{study.shortDescription}</p>
-                {study.description.map((para, j) => (
-                  <p key={j} className="mb-3">{para}</p>
-                ))}
-              </div>
-
-              <div className="aspect-[4/3]">
-                <DarkPlaceholder label={`0${i + 1} — Placeholder Image`} />
-              </div>
-            </div>
+      {/* Projects grid — pairs of 2 per row */}
+      <div>
+        {rows.map((pair, rowIdx) => (
+          <div key={rowIdx} className="grid grid-cols-2 border-b border-[#1a1917]/10">
+            <LeftCard study={pair[0]} />
+            {pair[1] ? (
+              <RightCard study={pair[1]} />
+            ) : (
+              <div className="aspect-[4/3] bg-[#eeeeee]" />
+            )}
           </div>
         ))}
       </div>
+
+      <div className="h-20" />
     </main>
   )
 }

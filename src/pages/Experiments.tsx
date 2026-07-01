@@ -1,65 +1,41 @@
 import { experiments } from '../data'
 
-function DarkPlaceholder({ label }: { label?: string }) {
-  return (
-    <div
-      className="relative w-full h-full"
-      style={{
-        backgroundColor: '#252320',
-        backgroundImage: `
-          linear-gradient(rgba(200,198,195,0.1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(200,198,195,0.1) 1px, transparent 1px)
-        `,
-        backgroundSize: '72px 72px',
-      }}
-    >
-      {label && (
-        <span className="absolute bottom-3 left-3 text-[0.64rem] font-mono text-[#c8c5c2]/40 leading-tight uppercase tracking-wide">
-          {label}
-        </span>
-      )}
-    </div>
-  )
+function ImagePlaceholder() {
+  return <div className="w-full h-full bg-[#D0CECC]" />
 }
 
-export default function Experiments() {
+export default function Labs() {
   return (
-    <main>
-      <div className="border-t border-[#1a1917]/25 mx-4" />
-
+    <main className="pt-[72px]">
       {experiments.map((exp, i) => (
-        <div key={exp.id}>
-          <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 px-4 pt-5 pb-6 border-t border-[#1a1917]/25">
-            <p className="text-[1.1rem] text-[#1a1917]">{`Experiment 0${i + 1}`}</p>
-            <p className="text-[1.1rem] text-[#1a1917]/50">{exp.title}</p>
-            <div className="text-base text-[#1a1917] leading-snug">
-              {Object.entries(exp.metadata).map(([k, v]) => (
-                <p key={k}>{v}</p>
+        <div key={exp.id} className="border-t border-[#1a1917]/10 first:border-t-0">
+          <div className="grid grid-cols-[1fr_1fr_2fr] gap-4 px-8 pt-6 pb-5">
+            <p className="text-sm text-[#1a1917]">{`Experiment 0${i + 1}`}</p>
+            <p className="text-sm text-[#1a1917]/40">{exp.title}</p>
+            <div className="text-sm text-[#1a1917]/40 leading-snug">
+              {Object.entries(exp.metadata).map(([, v]) => (
+                <span key={v} className="mr-4">{v}</span>
               ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-[1fr_2.5fr_1fr] gap-4 px-4 pb-12 items-start">
-            <div className="text-base text-[#1a1917] leading-[1.55]">
-              <p className="font-bold mb-3">{exp.shortDescription}</p>
+          <div className="grid grid-cols-[1fr_2.5fr_1fr] gap-4 px-8 pb-12 items-start">
+            <div className="text-sm text-[#1a1917] leading-[1.55]">
+              <p className="font-medium mb-3">{exp.shortDescription}</p>
             </div>
 
             <div className="aspect-[16/9]">
-              <DarkPlaceholder label={`Experiment 0${i + 1} — Preview`} />
+              <ImagePlaceholder />
             </div>
 
             <div className="flex flex-col gap-3">
               <div>
-                <div className="aspect-square">
-                  <DarkPlaceholder />
-                </div>
-                <p className="text-sm text-[#1a1917]/50 mt-1.5">Detail 1</p>
+                <div className="aspect-square"><ImagePlaceholder /></div>
+                <p className="text-xs text-[#1a1917]/40 mt-1.5">Detail 1</p>
               </div>
               <div>
-                <div className="aspect-square">
-                  <DarkPlaceholder />
-                </div>
-                <p className="text-sm text-[#1a1917]/50 mt-1.5">Detail 2</p>
+                <div className="aspect-square"><ImagePlaceholder /></div>
+                <p className="text-xs text-[#1a1917]/40 mt-1.5">Detail 2</p>
               </div>
             </div>
           </div>

@@ -19,14 +19,17 @@ export default function Nav() {
     spinningRef.current = false
   }
 
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    `text-sm leading-snug transition-opacity hover:opacity-50 ${isActive ? 'text-[#E85430]' : 'text-[#1a1917]'}`
+
   return (
-    <nav className="grid grid-cols-[auto_1fr_1fr_auto] gap-8 px-4 pt-4 pb-6 items-center fixed top-0 left-0 right-0 z-10">
+    <nav className="grid grid-cols-[auto_1fr_1fr_auto] gap-8 px-8 pt-6 pb-5 items-center fixed top-0 left-0 right-0 z-10">
       <Link
         to="/"
-        className="inline-flex items-center gap-1.5 text-sm text-[#1a1917] hover:opacity-50 transition-opacity leading-none"
+        className="inline-flex items-center text-sm text-[#1a1917] hover:opacity-50 transition-opacity leading-none"
       >
         <span
-          className="inline-block shrink-0 translate-y-px"
+          className="inline-block shrink-0"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
           <img
@@ -42,34 +45,23 @@ export default function Nav() {
       </Link>
 
       <div className="flex gap-4">
-        <NavLink
-          to="/work"
-          className={({ isActive }) =>
-            `text-sm leading-snug transition-opacity hover:opacity-50 ${isActive ? 'text-[#c8c5c2]' : 'text-[#1a1917]'}`
-          }
-        >
-          Work
-        </NavLink>
-        <NavLink
-          to="/experiments"
-          className={({ isActive }) =>
-            `text-sm leading-snug transition-opacity hover:opacity-50 ${isActive ? 'text-[#c8c5c2]' : 'text-[#1a1917]'}`
-          }
-        >
-          Experiments
-        </NavLink>
+        <NavLink to="/work" className={linkClass}>Work</NavLink>
+        <NavLink to="/labs" className={linkClass}>Labs</NavLink>
       </div>
 
       <div className="text-sm text-[#1a1917]/50 leading-snug">
-        Design &amp; Engineering<br />
+        Design and Engineering
       </div>
 
-      <a
-        href="mailto:manukyan.robert@gmail.com"
-        className="text-sm text-[#1a1917] hover:opacity-50 transition-opacity text-right whitespace-nowrap"
-      >
-        Contact
-      </a>
+      <div className="flex gap-4">
+        <NavLink to="/profile" className={linkClass}>Profile</NavLink>
+        <a
+          href="mailto:manukyanrobert@gmail.com"
+          className="text-sm text-[#1a1917] hover:opacity-50 transition-opacity whitespace-nowrap"
+        >
+          Contact
+        </a>
+      </div>
     </nav>
   )
 }
